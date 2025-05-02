@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/marketplace
+      - SPRING_DATASOURCE_USERNAME=marketplace
+      - SPRING_DATASOURCE_PASSWORD=marketplace123
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+    depends_on:
+      - db
+      - rabbitmq
+    networks:
+      - marketplace-network
+
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=marketplace
+      - POSTGRES_USER=marketplace
+      - POSTGRES_PASSWORD=marketplace123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - marketplace-network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - marketplace-network
+
+volumes:
+  postgres_data:
+  rabbitmq_data:
+
+networks:
+  marketplace-network:
+    driver: bridge 

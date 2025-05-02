@@ -1,0 +1,85 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/marketplace}
+    username: ${SPRING_DATASOURCE_USERNAME:marketplace}
+    password: ${SPRING_DATASOURCE_PASSWORD:marketplace123}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: habimanaflorbert@gmail.com
+    password: teie eqwb dvbl tbux
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        debug: true
+  rabbitmq:
+    host: ${SPRING_RABBITMQ_HOST:localhost}
+    port: ${SPRING_RABBITMQ_PORT:5672}
+    username: ${SPRING_RABBITMQ_USERNAME:guest}
+    password: ${SPRING_RABBITMQ_PASSWORD:guest}
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 1000
+          max-attempts: 3
+          max-interval: 10000
+          multiplier: 2.0
+    template:
+      retry:
+        enabled: true
+        max-attempts: 3
+        initial-interval: 1000
+        multiplier: 2.0
+        max-interval: 10000
+
+jwt:
+  secret: your-secret-key-here-must-be-at-least-256-bits-long
+  expiration: 86400000 # 24 hours in milliseconds
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+    tryItOutEnabled: true
+    filter: true
+    persistAuthorization: true
+    displayRequestDuration: true
+    docExpansion: none
+    defaultModelsExpandDepth: -1
+    defaultModelExpandDepth: 1
+    defaultModelRendering: example
+    displayOperationId: false
+    showExtensions: true
+    showCommonExtensions: true
+    deepLinking: true
+    layout: BaseLayout
+
+logging:
+  level:
+    root: INFO
+    com.marketplace: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: INFO 

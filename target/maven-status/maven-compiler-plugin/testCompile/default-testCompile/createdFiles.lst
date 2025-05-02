@@ -1,0 +1,12 @@
+com/marketplace/controller/StoreControllerTest.class
+com/marketplace/security/CustomUserDetailsServiceTest.class
+com/marketplace/service/ReviewServiceTest.class
+com/marketplace/service/OrderServiceTest.class
+com/marketplace/controller/OrderControllerTest.class
+com/marketplace/controller/ReviewControllerTest.class
+com/marketplace/controller/ProductControllerTest.class
+com/marketplace/service/StoreServiceTest.class
+com/marketplace/security/SecurityConfigTest.class
+com/marketplace/service/AuthServiceTest.class
+com/marketplace/service/ProductServiceTest.class
+com/marketplace/security/JwtUtilTest.class

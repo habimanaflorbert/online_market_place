@@ -1,0 +1,23 @@
+-------------------------------------------------------------------------------
+Test set: com.marketplace.config.SecurityConfigTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.907 s <<< FAILURE! -- in com.marketplace.config.SecurityConfigTest
+com.marketplace.config.SecurityConfigTest.securityFilterChain_ShouldConfigureSecurity -- Time elapsed: 0.130 s <<< ERROR!
+org.mockito.exceptions.misusing.WrongTypeOfReturnValue: 
+
+Object cannot be returned by csrf()
+csrf() should return CsrfConfigurer
+***
+If you're unsure why you're getting above error read on.
+Due to the nature of the syntax above problem might occur because:
+1. This exception *might* occur in wrongly written multi-threaded tests.
+   Please refer to Mockito FAQ on limitations of concurrency testing.
+2. A spy is stubbed using when(spy.foo()).then() syntax. It is safer to stub spies - 
+   - with doReturn|Throw() family of methods. More in javadocs for Mockito.spy() method.
+
+	at org.springframework.security.config.annotation.web.builders.HttpSecurity.csrf(HttpSecurity.java:1714)
+	at com.marketplace.config.SecurityConfigTest.securityFilterChain_ShouldConfigureSecurity(SecurityConfigTest.java:39)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
